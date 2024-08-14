@@ -84,7 +84,7 @@ int main(int argc, const char *argv[]) {
                 getchar();
                 fgets(author, sizeof(author), stdin);
                 author[strcspn(author, "\n")] = '\0';
-                printf("\nList of books by author:\n\n");
+                
 
                 for (int i = 0; i < 20; i++)
                 {
@@ -100,7 +100,7 @@ int main(int argc, const char *argv[]) {
                 getchar();
                 fgets(genre, sizeof(genre), stdin);
                 genre[strcspn(genre, "\n")] = '\0';
-                printf("\nList of books by genre:\n\n");
+                
 
                 for (int i = 0; i < 20; i++)
                 {
