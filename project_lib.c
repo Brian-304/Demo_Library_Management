@@ -1,96 +1,124 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//declaration
+
 // Create Structure of Library
 typedef struct {
     char bookName[40];
     char bookAuthor[40];
-    int bookPages;
-    float bookPrice;
+    char bookGenre[40];
+    int numberOfCopies;
 } library;
 
-//Structure of Operation
-typedef struct {
-    int i;
-    int myNum;
-    int books;
-    int select;
-
-} operation;
-
-int main(int argc, const char * argv[]) {
+// Function to display book info
+void display(library book) {
+    printf("Book name = %s\n", book.bookName);
+    printf("Author name = %s\n", book.bookAuthor);
+    printf("Genre name = %s\n", book.bookGenre);
+    printf("Number of copies = %d\n", book.numberOfCopies);
     printf("\n");
+}
+
+int main(int argc, const char *argv[]) {
+    printf("\n");
+
+    //Book Titles
+    char titles[20][50] = {"Harry Potter and the Sorcerer’s Stone", "Harry Potter and the Chamber of Secrets", "Harry Potter and the Goblet of Fire", "Don Quixote", "Harry Potter and the Prisoner of Azkaban",
+    "The Hobbit", "Wuthering Heights", "The Lord of The Rings", "Good Omens", "Coraline", "The Giver", "Number the Stars", "The Great Gatsby", "To Kill A Mocking Bird", "The Hunger Games", "Catching Fire", 
+    "Game of Thrones", "The Wild Robot", "The Lightning Thief", "The Last Olympian"};
+
+    //Book Authors
+    char authors[20][40] = {"JK Rowling", "JK Rowling", "JK Rowling", "Miguel de Cervantes", "JK Rowling", "Tolkien", "Tolkien", "Neil Gaiman", "Emily Bronte", "Neil Gaiman", "Lois Lowry", "Lois Lowry", "F. Scott Fitzgerald", "Harper Lee", "Suzanne Collins", 
+    "Suzanne Collins", "George R. R. Martin", "Peter Brown", "Rick Riordan", "Rick Riordan"};
+
+    //Book Genres
+    char genres[20][30] = {"Fantasy", "Fantasy", "Fantasy", "Parody", "Fantasy", "Fantasy", "Gothic", "Fantasy", "Comedy", "Horror", "Dystopian", "Fiction", "Tragedy", "Gothic", "Dystopian", "Dystopian", "Fantasy", "Fiction", "Fiction", "Fiction"};
+    int numCopies[20] = {30, 21, 14, 20, 12, 32, 34, 12, 2, 14, 7, 2, 12, 19, 38, 4, 17, 27, 26, 20};
+
     printf("******************** Welcome to E-Library ********************\n");
-        //Amount of Books in array
-        library lib[100];
-        
-        //Operation Variables
-        operation index;
 
-        index.i = 0;
-        index.books = 0;
-        index.select = 0;
-        //Menu
-        while (index.select != 4) {
+    // Amount of Books in array
+    library lib[100];
 
-            printf("\n\n*MENU*\n");
-            printf("1. Add book information\n");
-            printf("2. Display book information\n");
-            printf("3. List the count of books in the library\n");
-            printf("4. Exit");
-            
-            printf("\n\nEnter one of the above: ");
-            scanf("%d", &index.select);
 
-            switch (index.select) {
-            //If user selects 1
+    //Pre-populate Books
+    for (int i = 0; i < 20; i++) {
+        strcpy(lib[i].bookName, titles[i]);
+        strcpy(lib[i].bookAuthor, authors[i]);
+        strcpy(lib[i].bookGenre, genres[i]);
+        lib[i].numberOfCopies = numCopies[i];
+    }
+
+    // Operation Variables
+    int select = 0;
+    char author[30];
+    char genre[30];
+
+    // Menu
+    while (select != 4) {
+        printf("\n\n*MENU*\n");
+        printf("1. List of books in library\n");
+        printf("2. Search all books by author\n");
+        printf("3. Search all books by genre\n");
+        printf("4. Exit\n");
+
+        printf("\n\nEnter one of the above: ");
+        scanf("%d", &select);
+
+        switch (select) {
+
+            //Case 1: Function to print books
             case 1:
-                    printf("Add book information\n\n");
+                
+                printf("\n\nList of books:\n\n");
+                for (int i = 0; i < 20; i++) {
+                    display(lib[i]);
+                }
 
-                    printf("\nEnter book name = ");
-                    scanf("%d", lib[index.i].bookName);
-                    fgets(lib[index.i].bookName, sizeof(lib[index.i].bookName), stdin);
-                    printf("%s", lib[index.i].bookName);
-            
-                    printf("\nEnter author name = ");
-                    scanf("%d", lib[index.i].bookAuthor);
-                    fgets(lib[index.i].bookAuthor, sizeof(lib[index.i].bookAuthor), stdin);
-                    printf("%s", lib[index.i].bookAuthor);
-                    
-                    printf("\nEnter number of pages = ");
-                    scanf("%d", &lib[index.i].bookPages);
-                    printf("%d", lib[index.i].bookPages);
-                    
-                    printf("\n\nEnter book price = ");
-                    scanf("%f", &lib[index.i].bookPrice);
-                    printf("%.2f", lib[index.i].bookPrice);
-                            
-                    index.i++;
-                    index.books++;
-                    break;
-                //Display Book
-                case 2:
-                    printf("\n\nYou have entered the following books:\n\n");
-                    for (int i = 0; i < index.books; i++)
-                    {
-                        printf("Book name = %s", lib[i].bookName);
-                        printf("Book author name = %s", lib[i].bookAuthor);
-                        printf("Book pages = %d", lib[i].bookPages);
-                        printf("\nBook price = $%.2f\n", lib[i].bookPrice);
-                        printf("\n");
+                break;
+
+            //Case 2: //Search for author
+            case 2:
+
+                printf("\n\nEnter Author Name: ");
+                getchar();
+                fgets(author, sizeof(author), stdin);
+                author[strcspn(author, "\n")] = '\0';
+                printf("\nList of books by author:\n\n");
+
+                for (int i = 0; i < 20; i++)
+                {
+                    if (strcmp(lib[i].bookAuthor, author) == 0) {
+                        display(lib[i]);
                     }
-                    break;
-                //Number of books in library
-                case 3:
-                    printf("\nNumber of books in library: %d\n", index.books);
-                    break;
-                //Exit
-                case 4:
-                    printf("\n");
-                    exit(0);
-            }
+                }
+                break;
 
+            //Case 3: Search for genre
+            case 3:
+                printf("\n\nEnter Genre: ");
+                getchar();
+                fgets(genre, sizeof(genre), stdin);
+                genre[strcspn(genre, "\n")] = '\0';
+                printf("\nList of books by genre:\n\n");
+
+                for (int i = 0; i < 20; i++)
+                {
+                    if (strcmp(lib[i].bookGenre, genre) == 0) {
+                        display(lib[i]);
+                    }
+                }
+                break;
+
+            //Case 4: Exit program
+            case 4:
+                printf("\nExiting the program.\n");
+                exit(0);
+                break;
+            default:
+                printf("Invalid option! Try again.\n");
+                break;
         }
+    }
     return 0;
 }
