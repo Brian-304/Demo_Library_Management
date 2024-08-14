@@ -22,17 +22,19 @@ void display(library book) {
 int main(int argc, const char *argv[]) {
     printf("\n");
 
-    //Book Titles
+    //Book titles
     char titles[20][50] = {"Harry Potter and the Sorcerer’s Stone", "Harry Potter and the Chamber of Secrets", "Harry Potter and the Goblet of Fire", "Don Quixote", "Harry Potter and the Prisoner of Azkaban",
     "The Hobbit", "Wuthering Heights", "The Lord of The Rings", "Good Omens", "Coraline", "The Giver", "Number the Stars", "The Great Gatsby", "To Kill A Mocking Bird", "The Hunger Games", "Catching Fire", 
     "Game of Thrones", "The Wild Robot", "The Lightning Thief", "The Last Olympian"};
 
-    //Book Authors
+    //Book authors
     char authors[20][40] = {"JK Rowling", "JK Rowling", "JK Rowling", "Miguel de Cervantes", "JK Rowling", "Tolkien", "Tolkien", "Neil Gaiman", "Emily Bronte", "Neil Gaiman", "Lois Lowry", "Lois Lowry", "F. Scott Fitzgerald", "Harper Lee", "Suzanne Collins", 
     "Suzanne Collins", "George R. R. Martin", "Peter Brown", "Rick Riordan", "Rick Riordan"};
 
-    //Book Genres
+    //Book genres
     char genres[20][30] = {"Fantasy", "Fantasy", "Fantasy", "Parody", "Fantasy", "Fantasy", "Gothic", "Fantasy", "Comedy", "Horror", "Dystopian", "Fiction", "Tragedy", "Gothic", "Dystopian", "Dystopian", "Fantasy", "Fiction", "Fiction", "Fiction"};
+
+    //Book copies
     int numCopies[20] = {30, 21, 14, 20, 12, 32, 34, 12, 2, 14, 7, 2, 12, 19, 38, 4, 17, 27, 26, 20};
 
     printf("******************** Welcome to E-Library ********************\n");
@@ -85,7 +87,6 @@ int main(int argc, const char *argv[]) {
                 fgets(author, sizeof(author), stdin);
                 author[strcspn(author, "\n")] = '\0';
                 
-
                 for (int i = 0; i < 20; i++)
                 {
                     if (strcmp(lib[i].bookAuthor, author) == 0) {
@@ -101,7 +102,6 @@ int main(int argc, const char *argv[]) {
                 fgets(genre, sizeof(genre), stdin);
                 genre[strcspn(genre, "\n")] = '\0';
                 
-
                 for (int i = 0; i < 20; i++)
                 {
                     if (strcmp(lib[i].bookGenre, genre) == 0) {
